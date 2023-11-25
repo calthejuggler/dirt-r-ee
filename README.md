@@ -10,7 +10,7 @@ A CLI tool for printing the structure of a given directory in a tree.
 
 Dirt-r-ee is a command-line interface (CLI) tool built in Rust that generates a tree representation of a directory
 structure. It's designed to provide a clear view of file and directory arrangements, supporting various features like
-including hidden files, respecting `.gitignore` rules, and customizable spacing.
+including hidden files, respecting `.gitignore` rules, customizable spacing, and output customization.
 
 ## Features
 
@@ -19,23 +19,28 @@ including hidden files, respecting `.gitignore` rules, and customizable spacing.
 - **Git Ignore Support**: Respects `.gitignore` files to exclude certain files and directories.
 - **Custom Spacing**: Allows customizing the spacing in the tree structure for better readability.
 - **Clipboard Support**: Provides an option to copy the generated tree to the clipboard.
+- **Output Customization**: Adds a prefix to each line and outputs the tree to a specified file.
+- **File Output**: Offers the ability to write the tree structure to a file.
+- **Prefix Customization**: Allows adding a custom prefix to each line of the output.
 - **Parallel Processing**: Leverages Rust's `rayon` crate for efficient directory traversal.
 
 ## Installation
 
-To install Dirt-r-ee, you need Rust and Cargo installed on your system. Follow these steps:
+To install Dirt-r-ee, you need Rust and Cargo installed on your system. If you don't have them installed, you can follow
+the instructions [here](https://doc.rust-lang.org/cargo/getting-started/installation.html) to install them.
 
-1. Clone the repository: `git clone https://github.com/calthejuggler/dirt-r-ee.git`
-2. Change to the directory: `cd dirt-r-ee`
-3. Build the project: `cargo build --release`
-4. The executable can be found in `target/release`
+Once you have Rust and Cargo installed, you can install Dirt-r-ee using Cargo:
+
+```bash
+cargo install dirt-r-ee
+```
 
 ## Usage
 
 Run Dirt-r-ee from the command line. The basic command structure is as follows:
 
-```
-dirt-r-ee [OPTIONS]
+```bash
+dirt-r-ee [OPTIONS] [PATH] # PATH defaults to the current directory
 ```
 
 ### Options
@@ -45,6 +50,10 @@ dirt-r-ee [OPTIONS]
 - `-i`, `--include-hidden`: Include hidden files and directories in the output.
 - `-g`, `--git-ignored`: Include files and directories specified in `.gitignore`.
 - `-c`, `--copy`: Copy the output to the clipboard instead of printing it.
+- `-p`, `--prefix <PREFIX>`: Add a prefix to each line of the output. Default is "- ".
+- `-o`, `--out-file <FILE>`: Write the output to the specified file.
+- `-V`, `--version`: Show version information.
+- `-h`, `--help`: Show help information.
 
 ### Examples
 
@@ -52,6 +61,7 @@ dirt-r-ee [OPTIONS]
 - Display a specific directory: `dirt-r-ee -d /path/to/dir`
 - Include hidden files: `dirt-r-ee -i`
 - Copy the output to clipboard: `dirt-r-ee -c`
+- Use a custom prefix and write to a file: `dirt-r-ee -p "-> " -o tree.txt`
 
 ## Contributing
 
