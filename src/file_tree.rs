@@ -116,6 +116,12 @@ impl FileTree {
         ctx.set_contents(output).unwrap();
     }
 
+    pub fn write_to_file(&self, out_file: String, spacer: &str, prefix: &str) {
+        let mut output = String::new();
+        self.build_string(&mut output, spacer, prefix);
+        std::fs::write(out_file, output).unwrap();
+    }
+
     fn build_string(&self, output: &mut String, spacer: &str, prefix: &str) {
         let indent = spacer.repeat(self.depth);
         let name = self.path.file_name().unwrap().to_string_lossy();

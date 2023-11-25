@@ -36,4 +36,8 @@ fn main() {
     } else {
         file_tree.print(&spacer, &prefix);
     }
+
+    if args.out_file.is_some() {
+        file_tree.write_to_file(args.out_file.unwrap(), &spacer, &prefix);
+    }
 }
