@@ -86,7 +86,7 @@ impl FileTree {
         children
     }
 
-    pub fn print(&self, spacer: &str) {
+    pub fn print(&self, spacer: &str, prefix: &str) {
         let indent = spacer.repeat(self.depth);
         let name = self.path.file_name().unwrap().to_string_lossy();
         let suffix = if self.path.is_dir() { "/" } else { "" };
@@ -96,41 +96,49 @@ impl FileTree {
             false => Color::BrightCyan,
         };
 
-        println!("{}- {}{}", indent, name.color(color), suffix.color(color));
+        println!(
+            "{}{}{}{}",
+            indent,
+            prefix,
+            name.color(color),
+            suffix.color(color)
+        );
 
         for child in &self.children {
-            child.print(spacer);
+            child.print(spacer, prefix);
         }
     }
 
-    pub fn copy(&self, spacer: &str) {
+    pub fn copy(&self, spacer: &str, prefix: &str) {
         let mut output = String::new();
-        self.build_string(&mut output, spacer);
+        self.build_string(&mut output, spacer, prefix);
         let mut ctx: ClipboardContext = ClipboardProvider::new().unwrap();
         ctx.set_contents(output).unwrap();
     }
 
-    fn build_string(&self, output: &mut String, spacer: &str) {
+    fn build_string(&self, output: &mut String, spacer: &str, prefix: &str) {
         let indent = spacer.repeat(self.depth);
         let name = self.path.file_name().unwrap().to_string_lossy();
         let suffix = if self.path.is_dir() { "/" } else { "" };
 
-        let line = format!("{}- {}{}", indent, name, suffix);
+        let line = format!("{}{}{}{}", indent, prefix, name, suffix);
         output.push_str(&line);
         output.push('\n');
 
         for child in &self.children {
-            child.build_string(output, spacer);
+            child.build_string(output, spacer, prefix);
         }
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use super::*;
     use std::fs::{self, File};
     use std::io::Write;
+
     use tempfile::tempdir;
+
+    use super::*;
 
     fn create_test_environment() -> (PathBuf, HashSet<String>) {
         let test_dir = tempdir().unwrap();
