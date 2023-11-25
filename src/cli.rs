@@ -14,4 +14,6 @@ pub struct Args {
     pub copy: bool,
     #[arg(short, long)]
     pub prefix: Option<String>,
+    #[arg(short, long)]
+    pub out_file: Option<String>,
 }
