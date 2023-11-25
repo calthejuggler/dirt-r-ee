@@ -21,6 +21,7 @@ fn main() {
     let path = Path::new(&dir_str);
 
     let spacer = args.spacer.unwrap_or_else(|| "    ".to_string());
+    let prefix = args.prefix.unwrap_or_else(|| "- ".to_string());
 
     if !path.exists() {
         eprintln!("No such file or directory");
@@ -31,8 +32,8 @@ fn main() {
     let file_tree = FileTree::new(path, 1, ignore, args.include_hidden, args.git_ignored);
 
     if args.copy {
-        file_tree.copy(&spacer);
+        file_tree.copy(&spacer, &prefix);
     } else {
-        file_tree.print(&spacer);
+        file_tree.print(&spacer, &prefix);
     }
 }

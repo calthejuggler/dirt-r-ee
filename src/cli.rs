@@ -12,4 +12,6 @@ pub struct Args {
     pub git_ignored: bool,
     #[arg(short, long)]
     pub copy: bool,
+    #[arg(short, long)]
+    pub prefix: Option<String>,
 }
