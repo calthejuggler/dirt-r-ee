@@ -26,6 +26,20 @@ including hidden files, respecting `.gitignore` rules, customizable spacing, and
 
 ## Installation
 
+You can compile dirt(r)ee on your own architecture using `cargo install`, or with Homebrew on an M1 Macbook (Intel based
+Macs might work - I haven't tried. Let me know if you do!)
+
+More installation options coming soon!
+
+### Homebrew (MacOS - M1)
+
+```bash
+brew tap calthejuggler/dirtee
+brew install dirtee
+```
+
+### Cargo Install
+
 To install Dirt-r-ee, you need Rust and Cargo installed on your system. If you don't have them installed, you can follow
 the instructions [here](https://doc.rust-lang.org/cargo/getting-started/installation.html) to install them.
 
