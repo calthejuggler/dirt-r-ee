@@ -2,13 +2,13 @@
   <img src="https://github.com/calthejuggler/dirt-r-ee/assets/30095183/7ec6360e-2a01-49b4-98f8-e5ffbe9ee086" width="400" />
 </p>
 
-# Dirt-r-ee
+# Dirt(r)ee
 
 A CLI tool for printing the structure of a given directory in a tree.
 
 ## Overview
 
-Dirt-r-ee is a command-line interface (CLI) tool built in Rust that generates a tree representation of a directory
+Dirt(r)ee is a command-line interface (CLI) tool built in Rust that generates a tree representation of a directory
 structure. It's designed to provide a clear view of file and directory arrangements, supporting various features like
 including hidden files, respecting `.gitignore` rules, customizable spacing, and output customization.
 
@@ -40,7 +40,7 @@ cargo install dirt-r-ee
 Run Dirt-r-ee from the command line. The basic command structure is as follows:
 
 ```bash
-dirt-r-ee [OPTIONS] [PATH] # PATH defaults to the current directory
+dirtee [OPTIONS] [PATH] # PATH defaults to the current directory
 ```
 
 ### Options
@@ -57,11 +57,11 @@ dirt-r-ee [OPTIONS] [PATH] # PATH defaults to the current directory
 
 ### Examples
 
-- Display the current directory tree: `dirt-r-ee`
-- Display a specific directory: `dirt-r-ee -d /path/to/dir`
-- Include hidden files: `dirt-r-ee -i`
-- Copy the output to clipboard: `dirt-r-ee -c`
-- Use a custom prefix and write to a file: `dirt-r-ee -p "-> " -o tree.txt`
+- Display the current directory tree: `dirtee`
+- Display a specific directory: `dirtee -d /path/to/dir`
+- Include hidden files: `dirtee -i`
+- Copy the output to clipboard: `dirtee -c`
+- Use a custom prefix and write to a file: `dirtee -p "-> " -o tree.txt`
 
 ## Contributing
 
