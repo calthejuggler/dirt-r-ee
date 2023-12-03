@@ -1,5 +1,6 @@
 use clap::Parser;
 
+/// The arguments of the program.
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 pub struct Args {

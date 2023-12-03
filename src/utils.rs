@@ -2,6 +2,7 @@ use std::collections::HashSet;
 use std::fs;
 use std::path::Path;
 
+/// Reads the patterns to ignore from a .gitignore file.
 pub fn read_gitignore(path: &Path) -> HashSet<String> {
     fs::read_to_string(path.join(".gitignore"))
         .map(|content| {

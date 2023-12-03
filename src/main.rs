@@ -12,6 +12,7 @@ use crate::cli::Args;
 use crate::file_tree::FileTree;
 use crate::utils::read_gitignore;
 
+/// The entry point of the program.
 fn main() {
     let args = Args::parse();
 

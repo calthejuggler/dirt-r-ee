@@ -7,14 +7,25 @@ use clipboard::{ClipboardContext, ClipboardProvider};
 use colored::{Color, Colorize};
 use rayon::prelude::*;
 
+/// A tree of files and directories.
 #[derive(Debug)]
 pub struct FileTree {
+    /// The path of the file or directory.
     pub path: PathBuf,
+    /// The children of the file or directory.
     children: Vec<FileTree>,
+    /// The depth of the file or directory.
     depth: usize,
 }
 
+/// The implementation of the file tree.
 impl FileTree {
+    /// Creates a new file tree.
+    /// path: The path of the file or directory.
+    /// depth: The depth of the file or directory.
+    /// ignore: The set of patterns to ignore.
+    /// hidden: Whether to include hidden files and directories.
+    /// git_ignore: Whether to include files and directories ignored by git.
     pub fn new(
         path: &Path,
         depth: usize,
@@ -35,6 +46,7 @@ impl FileTree {
         }
     }
 
+    /// Finds the files and directories in a directory.
     fn find_files_and_directories(
         path: &Path,
         depth: usize,
@@ -86,6 +98,7 @@ impl FileTree {
         children
     }
 
+    /// Prints the file tree.
     pub fn print(&self, spacer: &str, prefix: &str) {
         let indent = spacer.repeat(self.depth);
         let name = self.path.file_name().unwrap().to_string_lossy();
@@ -109,6 +122,7 @@ impl FileTree {
         }
     }
 
+    /// Copies the file tree to the clipboard.
     pub fn copy(&self, spacer: &str, prefix: &str) {
         let mut output = String::new();
         self.build_string(&mut output, spacer, prefix);
@@ -116,12 +130,14 @@ impl FileTree {
         ctx.set_contents(output).unwrap();
     }
 
+    /// Writes the file tree to a file.
     pub fn write_to_file(&self, out_file: String, spacer: &str, prefix: &str) {
         let mut output = String::new();
         self.build_string(&mut output, spacer, prefix);
         std::fs::write(out_file, output).unwrap();
     }
 
+    /// Builds the string representation of the file tree.
     fn build_string(&self, output: &mut String, spacer: &str, prefix: &str) {
         let indent = spacer.repeat(self.depth);
         let name = self.path.file_name().unwrap().to_string_lossy();
